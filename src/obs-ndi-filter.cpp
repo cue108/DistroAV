@@ -1,6 +1,6 @@
 /*
 obs-ndi
-Copyright (C) 2016-2024 OBS-NDI Project <obsndi@obsndiproject.com>
+Copyright (C) 2016-2023 Stéphane Lepin <stephane.lepin@gmail.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -65,12 +65,12 @@ typedef struct {
 
 const char *ndi_filter_getname(void *)
 {
-	return Str("NDIPlugin.FilterName");
+	return obs_module_text("NDIPlugin.FilterName");
 }
 
 const char *ndi_audiofilter_getname(void *)
 {
-	return Str("NDIPlugin.AudioFilterName");
+	return obs_module_text("NDIPlugin.AudioFilterName");
 }
 
 void ndi_filter_update(void *data, obs_data_t *settings);
@@ -80,16 +80,19 @@ obs_properties_t *ndi_filter_getproperties(void *)
 	obs_properties_t *props = obs_properties_create();
 	obs_properties_set_flags(props, OBS_PROPERTIES_DEFER_UPDATE);
 
-	obs_properties_add_text(props, FLT_PROP_NAME,
-				Str("NDIPlugin.FilterProps.NDIName"),
-				OBS_TEXT_DEFAULT);
+	obs_properties_add_text(
+		props, FLT_PROP_NAME,
+		obs_module_text("NDIPlugin.FilterProps.NDIName"),
+		OBS_TEXT_DEFAULT);
 
-	obs_properties_add_text(props, FLT_PROP_GROUPS,
-				Str("NDIPlugin.FilterProps.NDIGroups"),
-				OBS_TEXT_DEFAULT);
+	obs_properties_add_text(
+		props, FLT_PROP_GROUPS,
+		obs_module_text("NDIPlugin.FilterProps.NDIGroups"),
+		OBS_TEXT_DEFAULT);
 
 	obs_properties_add_button(
-		props, "ndi_apply", Str("NDIPlugin.FilterProps.ApplySettings"),
+		props, "ndi_apply",
+		obs_module_text("NDIPlugin.FilterProps.ApplySettings"),
 		[](obs_properties_t *, obs_property_t *, void *private_data) {
 			auto s = (ndi_filter_t *)private_data;
 			auto settings = obs_source_get_settings(s->context);
@@ -114,7 +117,7 @@ void ndi_filter_getdefaults(obs_data_t *defaults)
 {
 	obs_data_set_default_string(
 		defaults, FLT_PROP_NAME,
-		Str("NDIPlugin.FilterProps.NDIName.Default"));
+		obs_module_text("NDIPlugin.FilterProps.NDIName.Default"));
 	obs_data_set_default_string(defaults, FLT_PROP_GROUPS, "");
 }
 

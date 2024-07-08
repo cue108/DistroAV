@@ -1,6 +1,6 @@
 /*
 obs-ndi
-Copyright (C) 2016-2024 OBS-NDI Project <obsndi@obsndiproject.com>
+Copyright (C) 2016-2023 Stéphane Lepin <stephane.lepin@gmail.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,9 +15,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see <https://www.gnu.org/licenses/>
 */
-#pragma once
+
+#ifndef PLUGIN_MAIN_H
+#define PLUGIN_MAIN_H
 
 #include "plugin-support.h"
+#include "obs-support/obs-app.h"
 #include "Config.h"
 
 #include <Processing.NDI.Lib.h>
@@ -26,7 +29,7 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 #ifdef USE_EMULATOR
 #define PLUGIN_UPDATE_HOST "127.0.0.1"
 #else
-#define PLUGIN_UPDATE_HOST "distroav.org"
+#define PLUGIN_UPDATE_HOST "distroav.firebaseapp.com"
 #endif
 #define PLUGIN_DISCORD_URL "https://discord.gg/ZuTxbUK3ug"
 #define PLUGIN_DONATE_URL "https://opencollective.com/obs-ndi/donate"
@@ -49,7 +52,6 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 	"https://github.com/obs-ndi/obs-ndi/blob/master/CI/libndi-get.sh"
 #endif
 
-extern const NDIlib_v5 *ndiLib;
+extern const NDIlib_v4 *ndiLib;
 
-const char *Str(const char *lookup);
-QString QTStr(const char *lookupVal);
+#endif // PLUGIN_MAIN_H
